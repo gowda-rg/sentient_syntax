@@ -4,6 +4,7 @@ import CustomCursor from '@/components/CustomCursor';
 import NeuralBackground from '@/components/NeuralBackground';
 import StarField from '@/components/StarField';
 import ContentLayers from '@/components/ContentLayers';
+import CosmicBackground from '@/components/CosmicBackground';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
@@ -35,6 +36,16 @@ const Index = () => {
       .hover-glow:hover {
         box-shadow: 0 0 15px rgba(104, 81, 255, 0.5);
       }
+      
+      @keyframes pulse-resonance {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(104, 81, 255, 0.4); }
+        70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(104, 81, 255, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(104, 81, 255, 0); }
+      }
+      
+      .resonance-pulse:hover {
+        animation: pulse-resonance 1.5s infinite;
+      }
     `;
     document.head.appendChild(style);
     
@@ -48,6 +59,7 @@ const Index = () => {
       {!isMobile && <CustomCursor />}
       <NeuralBackground />
       <StarField />
+      <CosmicBackground />
       
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-darshan-dark">

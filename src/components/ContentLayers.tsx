@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { toast } from "sonner";
@@ -103,7 +102,7 @@ const ContentLayers: React.FC = () => {
     localStorage.setItem('sentientSyntaxConnections', JSON.stringify(connections));
     
     // Show confirmation
-    toast("Connection received. I'll reach out when resonance aligns.");
+    toast("Resonance received. The field will respond when alignment occurs.");
     
     // Reset fields
     setIntent('');
@@ -256,7 +255,7 @@ const ContentLayers: React.FC = () => {
     },
     {
       id: 'social',
-      title: 'Connect',
+      title: 'Find Me',
       content: (
         <div className="space-y-6 max-w-md mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Find Me</h2>
@@ -276,10 +275,10 @@ const ContentLayers: React.FC = () => {
     },
     {
       id: 'connect',
-      title: 'Connect',
+      title: 'Resonance',
       content: (
         <div className="space-y-8 max-w-md mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Feel a resonance?</h2>
+          <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Resonance Field</h2>
           <p className="text-xl text-darshan-text/90">Want to connect with my intelligence?</p>
           
           <div className="space-y-6">
@@ -310,9 +309,9 @@ const ContentLayers: React.FC = () => {
             <button 
               type="button"
               onClick={handleSubmitIntent}
-              className="interactive px-6 py-3 border border-darshan-accent bg-darshan-accent/10 rounded-xl transition-all duration-300 hover:bg-darshan-accent/20 hover:scale-105"
+              className="interactive px-6 py-3 border border-darshan-accent bg-darshan-accent/10 rounded-xl transition-all duration-300 hover:bg-darshan-accent/20 hover:scale-105 resonance-pulse"
             >
-              Send with intention
+              Transmit Resonance
             </button>
           </div>
         </div>

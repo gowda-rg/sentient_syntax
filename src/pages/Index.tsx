@@ -55,14 +55,14 @@ const Index = () => {
   }, []);
 
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-darshan-dark">
+    <main className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-darshan-deep via-darshan-cosmic to-darshan-void">
       {!isMobile && <CustomCursor />}
       <NeuralBackground />
       <StarField />
       <CosmicBackground />
       
       {isLoading ? (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-darshan-dark">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-gradient-to-b from-darshan-deep via-darshan-cosmic to-darshan-void">
           <div className="w-16 h-16 rounded-full border-2 border-t-transparent border-darshan-accent animate-spin"></div>
         </div>
       ) : (

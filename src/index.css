@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -49,7 +48,7 @@
   }
   
   body {
-    @apply bg-darshan-dark text-darshan-text font-sans antialiased;
+    @apply bg-gradient-to-b from-darshan-deep via-darshan-cosmic to-darshan-void text-darshan-text font-sans antialiased;
     cursor: none;
   }
 
@@ -98,7 +97,10 @@
     @apply text-transparent bg-clip-text bg-gradient-to-r from-white to-darshan-glow/90;
   }
   
-  /* New hover and transition effects */
+  .cosmic-gradient {
+    @apply bg-gradient-to-br from-darshan-deep/90 via-darshan-cosmic/80 to-darshan-void/90 backdrop-blur-sm;
+  }
+  
   .hover-scale {
     @apply transition-transform duration-300;
   }

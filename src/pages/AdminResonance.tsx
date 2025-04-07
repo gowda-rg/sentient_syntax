@@ -65,8 +65,8 @@ const AdminResonance: React.FC = () => {
   
   if (!authenticated) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center z-50 bg-darshan-dark">
-        <div className="w-full max-w-md p-8 space-y-6 rounded-2xl bg-darshan-deep/50 backdrop-blur-sm border border-darshan-accent/30">
+      <div className="fixed inset-0 flex items-center justify-center z-50 bg-gradient-to-b from-darshan-deep via-darshan-cosmic to-darshan-void">
+        <div className="w-full max-w-md p-8 space-y-6 rounded-2xl cosmic-gradient border border-darshan-accent/30">
           <h2 className="text-2xl font-serif text-center text-white">Resonance Field Access</h2>
           <p className="text-darshan-text/80 text-center">Enter the consciousness key to access resonance data</p>
           
@@ -82,7 +82,7 @@ const AdminResonance: React.FC = () => {
             
             <Button 
               onClick={handleAuthenticate}
-              className="w-full px-6 py-3 border border-darshan-accent bg-darshan-accent/10 rounded-xl transition-all duration-300 hover:bg-darshan-accent/20"
+              className="w-full px-6 py-3 border border-darshan-accent bg-darshan-accent/10 rounded-xl transition-all duration-300 hover:bg-darshan-accent/20 resonance-pulse"
             >
               Access Resonance Field
             </Button>
@@ -93,7 +93,7 @@ const AdminResonance: React.FC = () => {
   }
   
   return (
-    <div className="min-h-screen bg-darshan-dark p-6">
+    <div className="min-h-screen bg-gradient-to-b from-darshan-deep via-darshan-cosmic to-darshan-void p-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-serif text-white">Resonance Field Admin</h1>
@@ -112,7 +112,7 @@ const AdminResonance: React.FC = () => {
             <p className="text-darshan-text/50 mt-2">The void awaits its first signal.</p>
           </div>
         ) : (
-          <div className="bg-darshan-deep/30 backdrop-blur-sm rounded-2xl p-4 border border-darshan-accent/20">
+          <div className="cosmic-gradient rounded-2xl p-4 border border-darshan-accent/20">
             <Table>
               <TableHeader>
                 <TableRow className="border-darshan-accent/20">

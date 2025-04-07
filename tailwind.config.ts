@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -65,7 +64,9 @@ export default {
 				},
 				darshan: {
 					dark: '#0c0b1d',
-					deep: '#1A1F2C',
+					deep: '#0e1428',
+					cosmic: '#2a1758',
+					void: '#121212',
 					accent: '#6851FF',
 					glow: '#8E78FF',
 					text: '#F1F1F1'

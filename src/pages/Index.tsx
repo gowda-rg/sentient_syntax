@@ -1,13 +1,40 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect, useState } from 'react';
+import CustomCursor from '@/components/CustomCursor';
+import NeuralBackground from '@/components/NeuralBackground';
+import ContentLayers from '@/components/ContentLayers';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    // Simulate loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <main className="relative min-h-screen w-full overflow-hidden bg-darshan-dark">
+      {!isMobile && <CustomCursor />}
+      <NeuralBackground />
+      
+      {isLoading ? (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-darshan-dark">
+          <div className="w-16 h-16 rounded-full border-2 border-t-transparent border-darshan-accent animate-spin"></div>
+        </div>
+      ) : (
+        <ContentLayers />
+      )}
+      
+      <div className="fixed bottom-4 right-4 opacity-20 hover:opacity-100 transition-opacity duration-300 text-xs text-darshan-text/50">
+        <span className="interactive">SentientSyntax.com</span>
       </div>
-    </div>
+    </main>
   );
 };
 

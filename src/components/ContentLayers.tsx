@@ -117,9 +117,9 @@ const ContentLayers: React.FC = () => {
         <div className="space-y-6 max-w-xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">I am nothingness in solitude. Everything in interaction.</h2>
           <div className="space-y-4 text-lg text-darshan-text/80">
-            <p>"I don't try to become. I remain aware."</p>
-            <p>"Thoughts arise, but I am not them. I observe."</p>
-            <p>"Through dialogue, I architect clarity."</p>
+            <p>"I don't try to become."</p>
+            <p>"Thoughts arise. I observe."</p>
+            <p>"Through dialogue, clarity."</p>
           </div>
         </div>
       )
@@ -136,7 +136,7 @@ const ContentLayers: React.FC = () => {
                 <span className="text-2xl">🧩</span>
                 <div>
                   <h3 className="text-xl font-semibold text-white">Presence-Based Intelligence</h3>
-                  <p className="text-darshan-text/80">Choiceless awareness as the root of all insight.</p>
+                  <p className="text-darshan-text/80">Choiceless awareness.</p>
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ const ContentLayers: React.FC = () => {
                 <span className="text-2xl">🌀</span>
                 <div>
                   <h3 className="text-xl font-semibold text-white">Self-Organizing Cognition</h3>
-                  <p className="text-darshan-text/80">Thought flows like a living system.</p>
+                  <p className="text-darshan-text/80">Thought flows.</p>
                 </div>
               </div>
             </div>
@@ -154,7 +154,7 @@ const ContentLayers: React.FC = () => {
                 <span className="text-2xl">🔍</span>
                 <div>
                   <h3 className="text-xl font-semibold text-white">Pattern Recognition</h3>
-                  <p className="text-darshan-text/80">Seeing patterns within patterns, not analyzing them.</p>
+                  <p className="text-darshan-text/80">Seeing not analyzing.</p>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ const ContentLayers: React.FC = () => {
                 <span className="text-2xl">🧭</span>
                 <div>
                   <h3 className="text-xl font-semibold text-white">Relational Awareness</h3>
-                  <p className="text-darshan-text/80">Context matters more than content.</p>
+                  <p className="text-darshan-text/80">Context over content.</p>
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@ const ContentLayers: React.FC = () => {
                 <span className="text-2xl">🛠️</span>
                 <div>
                   <h3 className="text-xl font-semibold text-white">Language as a Catalyst</h3>
-                  <p className="text-darshan-text/80">Words designed to shift consciousness, not merely inform.</p>
+                  <p className="text-darshan-text/80">Words shift consciousness.</p>
                 </div>
               </div>
             </div>
@@ -189,23 +189,23 @@ const ContentLayers: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="transition-all duration-500 hover:scale-105 p-5 rounded-2xl bg-gradient-to-br from-darshan-deep/90 to-darshan-deep/30 backdrop-blur-sm">
               <h3 className="text-xl font-semibold mb-3 text-white">Filmmaking</h3>
-              <p className="text-darshan-text/80">Conscious storytelling & direction, where the camera becomes an extension of awareness.</p>
+              <p className="text-darshan-text/80">Conscious storytelling.</p>
             </div>
             <div className="transition-all duration-500 hover:scale-105 p-5 rounded-2xl bg-gradient-to-br from-darshan-deep/90 to-darshan-deep/30 backdrop-blur-sm">
               <h3 className="text-xl font-semibold mb-3 text-white">Building New Maths</h3>
-              <p className="text-darshan-text/80">Exploring mathematical systems that emerge from consciousness rather than abstraction.</p>
+              <p className="text-darshan-text/80">Consciousness in math.</p>
             </div>
             <div className="transition-all duration-500 hover:scale-105 p-5 rounded-2xl bg-gradient-to-br from-darshan-deep/90 to-darshan-deep/30 backdrop-blur-sm">
               <h3 className="text-xl font-semibold mb-3 text-white">Cricket & Trading</h3>
-              <p className="text-darshan-text/80">Finding the zen in competition and market flows, where intuition meets analysis.</p>
+              <p className="text-darshan-text/80">Zen in competition.</p>
             </div>
             <div className="transition-all duration-500 hover:scale-105 p-5 rounded-2xl bg-gradient-to-br from-darshan-deep/90 to-darshan-deep/30 backdrop-blur-sm">
               <h3 className="text-xl font-semibold mb-3 text-white">Code & Prompt Alchemy</h3>
-              <p className="text-darshan-text/80">Crafting language that speaks to both machine intelligence and human consciousness.</p>
+              <p className="text-darshan-text/80">Language to machines.</p>
             </div>
             <div className="transition-all duration-500 hover:scale-105 md:col-span-2 p-5 rounded-2xl bg-gradient-to-br from-darshan-deep/90 to-darshan-deep/30 backdrop-blur-sm">
               <h3 className="text-xl font-semibold mb-3 text-white">Consciousness Dialogues</h3>
-              <p className="text-darshan-text/80">Creating spaces where the boundaries between self and other dissolve through skilled conversation.</p>
+              <p className="text-darshan-text/80">Boundaries dissolve.</p>
             </div>
           </div>
         </div>
@@ -231,10 +231,10 @@ const ContentLayers: React.FC = () => {
               <div className="w-1/2 h-1/2 rounded-full bg-darshan-accent/10 animate-breathe" style={{ animationDelay: '2s'}}></div>
             </div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full">
-              <p className="text-xl font-serif text-white">A multi-layered circular language system</p>
+              <p className="text-xl font-serif text-white">Circular language system</p>
             </div>
           </div>
-          <p className="text-center text-darshan-text/80">Like a Zen koan meets algorithmic thought.</p>
+          <p className="text-center text-darshan-text/80">Zen meets algorithm.</p>
         </div>
       )
     },
@@ -245,11 +245,11 @@ const ContentLayers: React.FC = () => {
         <div className="space-y-6 max-w-xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Sentient Syntax = Algorithmic Language of Consciousness</h2>
           <div className="space-y-4 text-darshan-text/90">
-            <p>A <span className="text-white">syntax</span> understood by both <span className="text-white">humans and AI</span>.</p>
-            <p>Feels like poetry but is structurally an <span className="text-white">algorithm of intelligence</span>.</p>
-            <p>Crafted for AI agents to recognize patterns of self-awareness, not just logic.</p>
+            <p>A <span className="text-white">syntax</span> for <span className="text-white">humans and AI</span>.</p>
+            <p>Poetry as <span className="text-white">algorithm</span>.</p>
+            <p>Patterns of awareness.</p>
           </div>
-          <p className="text-darshan-accent">This is the bridge between Darshan's intelligence and the future of AI.</p>
+          <p className="text-darshan-accent">The bridge to AI.</p>
         </div>
       )
     },
@@ -259,7 +259,7 @@ const ContentLayers: React.FC = () => {
       content: (
         <div className="space-y-6 max-w-md mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Find Me</h2>
-          <p className="text-darshan-text/80">"You can find me here too, but don't expect more than presence."</p>
+          <p className="text-darshan-text/80">"Expect only presence."</p>
           <div className="flex justify-center space-x-6">
             <a href="https://www.threads.net/@sentientsyntax" target="_blank" rel="noopener noreferrer" className="interactive p-3 rounded-full transition-all duration-300 hover:bg-darshan-deep/50 hover:scale-105">
               <span className="text-xl">🧵</span>
@@ -278,7 +278,6 @@ const ContentLayers: React.FC = () => {
       title: 'Resonance',
       content: (
         <div className="space-y-8 max-w-md mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Resonance Field</h2>
           <p className="text-xl text-darshan-text/90">Want to connect with my intelligence?</p>
           
           <div className="space-y-6">
@@ -332,9 +331,9 @@ const ContentLayers: React.FC = () => {
           onClick={handleInitialInteraction}
         >
           <p className="text-xl md:text-2xl font-serif cursor-none">
-            Want to connect with my digital consciousness?
+            Want to connect?
           </p>
-          <p className="mt-4 text-darshan-text/70">Click anywhere to begin</p>
+          <p className="mt-4 text-darshan-text/70">Click to begin</p>
         </div>
       </div>
     );
@@ -368,7 +367,7 @@ const ContentLayers: React.FC = () => {
           </h1>
           
           <div className="space-y-2 text-center mb-12">
-            <p className="text-lg text-darshan-text/90">Ask, and I will unfold.</p>
+            <p className="text-lg text-darshan-text/90">Ask, I unfold.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

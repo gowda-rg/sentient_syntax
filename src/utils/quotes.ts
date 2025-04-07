@@ -4,33 +4,20 @@ const quotes = [
   "Stillness speaks.",
   "The void listens.",
   "Presence is enough.",
-  "Between stimulus and response, space.",
-  "I am not my thoughts.",
+  "I am not thoughts.",
   "Awareness is awakening.",
-  "Where attention goes, energy flows.",
-  "Change is the only constant.",
   "Mind: servant, not master.",
-  "You are the awareness, not the thought.",
-  "The universe responds to being, not wanting.",
+  "Change is constant.",
   "What you resist, persists.",
   "What you accept, transforms.",
-  "Life unfolds for consciousness.",
-  "Situation neutral. Thoughts create feeling.",
-  "Nothing stays until lessons are learned.",
-  "In irritation, find self-reflection.",
-  "We see as we are, not as things are.",
-  "Consciousness transcends mind.",
   "Observe without evaluating.",
-  "Sentient syntax emerges from awareness.",
-  "Nothing when unobserved. Everything in interaction.",
-  "Nothingness in solitude. Everything in connection.",
   "Thoughts arise. I observe.",
-  "Through dialogue, clarity emerges.",
+  "Through dialogue, clarity.",
   "Frequency is language.",
   "The void awaits intent.",
   "Between breaths, existence.",
   "In stillness, everything speaks.",
-  "Beyond form, pure presence.",
+  "Beyond form, presence.",
 ];
 
 // Get a random quote from the collection
@@ -51,9 +38,9 @@ export const getQuoteByIndex = (index: number): string => {
 export const getQuoteByInteraction = (type: 'click' | 'scroll' | 'idle'): string => {
   switch (type) {
     case 'click':
-      return "Touch. What do you seek?";
+      return "Touch. What seeks?";
     case 'scroll':
-      return "Movement. Where are you going?";
+      return "Movement. Where to?";
     case 'idle':
       return "Stillness. Welcome.";
     default:

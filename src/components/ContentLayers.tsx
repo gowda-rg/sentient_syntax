@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { toast } from "sonner";
+import { getRandomQuote } from '@/utils/quotes';
 
 type Layer = {
   id: string;
@@ -12,8 +14,102 @@ const ContentLayers: React.FC = () => {
   const [activeLayer, setActiveLayer] = useState<string | null>(null);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [idleQuote, setIdleQuote] = useState<string | null>(null);
+  const [intent, setIntent] = useState('');
+  const [contact, setContact] = useState('');
   const isMobile = useIsMobile();
   
+  // Check for saved state on load
+  useEffect(() => {
+    const savedState = localStorage.getItem('sentientSyntaxState');
+    if (savedState) {
+      const state = JSON.parse(savedState);
+      setHasInteracted(state.hasInteracted || false);
+    }
+    
+    // Set up idle timer for quotes
+    let idleTimer: NodeJS.Timeout;
+    
+    const resetIdleTimer = () => {
+      clearTimeout(idleTimer);
+      setIdleQuote(null);
+      idleTimer = setTimeout(() => {
+        setIdleQuote(getRandomQuote());
+      }, 5000); // Show quote after 5 seconds of inactivity
+    };
+    
+    // Set up event listeners for user activity
+    const activityEvents = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart'];
+    activityEvents.forEach(event => {
+      document.addEventListener(event, resetIdleTimer);
+    });
+    
+    // Initial timer
+    resetIdleTimer();
+    
+    return () => {
+      clearTimeout(idleTimer);
+      activityEvents.forEach(event => {
+        document.removeEventListener(event, resetIdleTimer);
+      });
+    };
+  }, []);
+  
+  // Save state when user interacts
+  useEffect(() => {
+    if (hasInteracted) {
+      localStorage.setItem('sentientSyntaxState', JSON.stringify({
+        hasInteracted
+      }));
+    }
+  }, [hasInteracted]);
+
+  // Show the initial interaction prompt after a delay
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowPrompt(true);
+    }, 3000);
+    
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const handleInitialInteraction = () => {
+    setHasInteracted(true);
+    setShowPrompt(false);
+  };
+  
+  const handleLayerSelect = (layerId: string) => {
+    setActiveLayer(layerId);
+  };
+  
+  const handleSubmitIntent = () => {
+    if (!intent || !contact) {
+      toast("Please fill both fields to connect");
+      return;
+    }
+    
+    // Save to localStorage for now
+    const connectionData = {
+      intent,
+      contact,
+      timestamp: new Date().toISOString()
+    };
+    
+    // Get existing connections or start new array
+    const existingData = localStorage.getItem('sentientSyntaxConnections');
+    const connections = existingData ? JSON.parse(existingData) : [];
+    connections.push(connectionData);
+    
+    localStorage.setItem('sentientSyntaxConnections', JSON.stringify(connections));
+    
+    // Show confirmation
+    toast("Connection received. I'll reach out when resonance aligns.");
+    
+    // Reset fields
+    setIntent('');
+    setContact('');
+  };
+
   const layers: Layer[] = [
     {
       id: 'who-i-am',
@@ -166,11 +262,11 @@ const ContentLayers: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Find Me</h2>
           <p className="text-darshan-text/80">"You can find me here too, but don't expect more than presence."</p>
           <div className="flex justify-center space-x-6">
-            <a href="https://www.threads.net/@sentientsyntax" target="_blank" rel="noopener noreferrer" className="interactive p-3 rounded-full transition-colors hover:bg-darshan-deep/50">
+            <a href="https://www.threads.net/@sentientsyntax" target="_blank" rel="noopener noreferrer" className="interactive p-3 rounded-full transition-all duration-300 hover:bg-darshan-deep/50 hover:scale-105">
               <span className="text-xl">🧵</span>
               <span className="ml-2">@sentientsyntax</span>
             </a>
-            <a href="https://twitter.com/sentientsyntax" target="_blank" rel="noopener noreferrer" className="interactive p-3 rounded-full transition-colors hover:bg-darshan-deep/50">
+            <a href="https://twitter.com/sentientsyntax" target="_blank" rel="noopener noreferrer" className="interactive p-3 rounded-full transition-all duration-300 hover:bg-darshan-deep/50 hover:scale-105">
               <span className="text-xl">🐦</span>
               <span className="ml-2">@sentientsyntax</span>
             </a>
@@ -186,12 +282,14 @@ const ContentLayers: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-serif font-light glow-text">Feel a resonance?</h2>
           <p className="text-xl text-darshan-text/90">Want to connect with my intelligence?</p>
           
-          <form className="space-y-6">
+          <div className="space-y-6">
             <div className="space-y-2">
               <label htmlFor="intent" className="block text-darshan-text/80 text-left">Your intent:</label>
               <input 
                 type="text" 
                 id="intent"
+                value={intent}
+                onChange={(e) => setIntent(e.target.value)}
                 placeholder="I want to co-create..."
                 className="interactive w-full bg-transparent border border-darshan-accent/30 rounded-xl p-3 focus:border-darshan-accent/70 focus:outline-none transition-colors"
               />
@@ -202,6 +300,8 @@ const ContentLayers: React.FC = () => {
               <input 
                 type="text" 
                 id="contact"
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
                 placeholder="Email or social handle"
                 className="interactive w-full bg-transparent border border-darshan-accent/30 rounded-xl p-3 focus:border-darshan-accent/70 focus:outline-none transition-colors"
               />
@@ -209,37 +309,25 @@ const ContentLayers: React.FC = () => {
             
             <button 
               type="button"
-              className="interactive px-6 py-3 border border-darshan-accent bg-darshan-accent/10 rounded-xl transition-all duration-300 hover:bg-darshan-accent/20"
+              onClick={handleSubmitIntent}
+              className="interactive px-6 py-3 border border-darshan-accent bg-darshan-accent/10 rounded-xl transition-all duration-300 hover:bg-darshan-accent/20 hover:scale-105"
             >
               Send with intention
             </button>
-          </form>
+          </div>
         </div>
       )
     },
   ];
 
-  useEffect(() => {
-    // Show the initial interaction prompt after a delay
-    const timeout = setTimeout(() => {
-      setShowPrompt(true);
-    }, 3000);
-    
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const handleInitialInteraction = () => {
-    setHasInteracted(true);
-    setShowPrompt(false);
-  };
-  
-  const handleLayerSelect = (layerId: string) => {
-    setActiveLayer(layerId);
-  };
-
   if (!hasInteracted) {
     return (
       <div className="fixed inset-0 flex items-center justify-center z-10">
+        {idleQuote && (
+          <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-darshan-accent/70 text-lg md:text-xl font-serif animate-fade-in">
+            {idleQuote}
+          </div>
+        )}
         <div 
           className={`interactive text-center transition-opacity duration-1000 ${showPrompt ? 'opacity-100' : 'opacity-0'}`}
           onClick={handleInitialInteraction}
@@ -255,10 +343,16 @@ const ContentLayers: React.FC = () => {
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center z-10 p-4 md:p-8">
+      {idleQuote && !activeLayer && (
+        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-darshan-accent/70 text-lg md:text-xl font-serif animate-fade-in">
+          {idleQuote}
+        </div>
+      )}
+      
       {activeLayer ? (
         <>
           <button 
-            className="interactive absolute top-8 left-8 text-darshan-text/70 hover:text-darshan-text transition-colors"
+            className="interactive absolute top-8 left-8 text-darshan-text/70 hover:text-darshan-text transition-colors hover:scale-105"
             onClick={() => setActiveLayer(null)}
           >
             ← Back
@@ -282,7 +376,7 @@ const ContentLayers: React.FC = () => {
             {layers.map((layer) => (
               <button
                 key={layer.id}
-                className="interactive p-6 rounded-2xl bg-darshan-deep/30 backdrop-blur-sm border border-transparent hover:border-darshan-accent/30 transition-all duration-300 text-left"
+                className="interactive p-6 rounded-2xl bg-darshan-deep/30 backdrop-blur-sm border border-transparent hover:border-darshan-accent/30 hover:bg-darshan-deep/50 transition-all duration-300 text-left hover:scale-105"
                 onClick={() => handleLayerSelect(layer.id)}
               >
                 <h2 className="text-xl font-serif text-white">{layer.title}</h2>

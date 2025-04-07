@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import CustomCursor from '@/components/CustomCursor';
 import NeuralBackground from '@/components/NeuralBackground';
+import StarField from '@/components/StarField';
 import ContentLayers from '@/components/ContentLayers';
 import { useIsMobile } from '@/hooks/use-mobile';
 
@@ -18,10 +19,35 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Add new CSS animations to the index.css file
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes float-slow {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+      
+      .float-animation {
+        animation: float-slow 8s ease-in-out infinite;
+      }
+      
+      .hover-glow:hover {
+        box-shadow: 0 0 15px rgba(104, 81, 255, 0.5);
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   return (
     <main className="relative min-h-screen w-full overflow-hidden bg-darshan-dark">
       {!isMobile && <CustomCursor />}
       <NeuralBackground />
+      <StarField />
       
       {isLoading ? (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-darshan-dark">

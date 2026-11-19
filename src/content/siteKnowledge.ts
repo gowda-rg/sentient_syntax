@@ -50,12 +50,19 @@ export const writingDestinations: WritingDestination[] = [
 
 const projectRailExclude = new Set(["substack", "docs-github-io"]);
 
+/** Public site URL and brand asset (sync with index.html canonical / OG). */
+export const siteBrand = {
+  siteUrl: "https://www.sentientsyntax.com/",
+  logoSrc: "/logo.jpeg",
+  logoAlt: "Sentient Syntax",
+};
+
 export const profile = {
-  name: "Gowda RG",
+  name: "Darshan RG",
   title: "Full Stack AI Engineer",
   subtitle: "React · REST · SQL · Python ML · Applied AI",
   location: "Bengaluru, India",
-  email: "darshanrgs56@gmail.com",
+  email: "darshanrgs45@gmail.com",
   linkedin: "https://www.linkedin.com/in/gowda-rg/",
   summary:
     "Full-stack engineer with production contact-center experience at Tevatel (React portals, telephony REST, SQL CRM). Independent work spans ML telemetry, simulation platforms, portfolio systems, and documented research repos.",
@@ -64,7 +71,7 @@ export const profile = {
   links: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/gowda-rg/" },
     { label: "GitHub", href: "https://github.com/gowda-rg" },
-    { label: "Email", href: "mailto:darshanrgs56@gmail.com" },
+    { label: "Email", href: "mailto:darshanrgs45@gmail.com" },
   ],
 };
 

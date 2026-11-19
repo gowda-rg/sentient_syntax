@@ -11,7 +11,7 @@ Single-screen hub: cosmic background, glass panels, center focus (no long vertic
 - **Writing** — Substack and GitHub Pages in their own section (`writingDestinations` in `siteKnowledge.ts`), not duplicated on the project rail
 - **Glass UI** — translucent cards over neural / star / cosmic layers (dark only)
 - **Resume** — `public/Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf` (download from Overview / Contact)
-- **Brand** — `public/favicon.svg` (SS monogram; not the old Lovable `.ico`)
+- **Brand** — `public/logo.jpeg` (fractal mark; favicon, OG image, sidebar)
 
 ## Stack
 
@@ -40,7 +40,9 @@ Node: see `.nvmrc` (LTS recommended).
 
 ```
 public/
-  favicon.svg
+  logo.jpeg
+  robots.txt
+  sitemap.xml
   Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf
 src/
   content/siteKnowledge.ts    # Site copy (sync from PKB)
@@ -81,4 +83,4 @@ Edit `portfolio-resume/professional-knowledge-base/`, then update `src/content/s
 
 ## License
 
-Personal project — Gowda RG.
+Personal project — Darshan RG.

@@ -1,5 +1,5 @@
 import { useMemo, useState, type ReactNode } from "react";
-import AppearanceSidebar, { type HubSection } from "@/components/AppearanceSidebar";
+import AppearanceSidebar, { hubSections, type HubSection } from "@/components/AppearanceSidebar";
 import {
   profile,
   employments,
@@ -7,6 +7,7 @@ import {
   projectsForRail,
   skillGroups,
   writingDestinations,
+  siteBrand,
   type ProjectItem,
 } from "@/content/siteKnowledge";
 
@@ -80,6 +81,17 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
 
       <div className="hub-main">
         <header className="hub-toolbar">
+          <div className="hub-mobile-brand md:hidden">
+            <img
+              src={siteBrand.logoSrc}
+              alt={siteBrand.logoAlt}
+              width={28}
+              height={28}
+              className="sidebar-brand-mark brand-logo"
+              decoding="async"
+            />
+            <span className="sidebar-brand-text">Sentient Syntax</span>
+          </div>
           <div className="hub-search-wrap">
             <label className="sr-only" htmlFor="portfolio-search">
               Search roles and projects
@@ -110,7 +122,7 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
               </ul>
             )}
           </div>
-          <div className="hub-tabs" role="tablist">
+          <div className="hub-tabs hidden md:flex" role="tablist">
             {(["home", "experience", "projects", "writing", "skills", "contact"] as HubSection[]).map((id) => (
               <button
                 key={id}
@@ -143,6 +155,23 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
           {section === "contact" && <ContactFocus />}
         </div>
       </div>
+
+      <nav className="hub-bottom-nav md:hidden" aria-label="Sections">
+        {hubSections.map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            className={`hub-bottom-tab ${section === s.id ? "hub-bottom-tab-active" : ""}`}
+            aria-current={section === s.id ? "page" : undefined}
+            onClick={() => {
+              setSection(s.id);
+              setSearchOpen(false);
+            }}
+          >
+            {s.shortLabel}
+          </button>
+        ))}
+      </nav>
     </div>
   );
 }

@@ -40,7 +40,7 @@ const CosmicBackground: React.FC = () => {
         this.x = window.innerWidth / 2;
         this.y = window.innerHeight / 2;
         this.radius = Math.random() * 10;
-        this.color = `rgba(104, 81, 255, ${Math.random() * 0.2})`;
+        this.color = `rgba(200, 210, 224, ${Math.random() * 0.12})`;
         this.speed = 0.1 + Math.random() * 0.3;
         this.growth = 0.2 + Math.random() * 0.3;
         this.maxRadius = 50 + Math.random() * 200;
@@ -66,7 +66,7 @@ const CosmicBackground: React.FC = () => {
       draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(104, 81, 255, ${this.opacity})`;
+        ctx.strokeStyle = `rgba(190, 200, 215, ${this.opacity * 0.85})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -130,11 +130,10 @@ const CosmicBackground: React.FC = () => {
         this.opacity = 0.1 + Math.random() * 0.3;
         this.speed = 0.01 + Math.random() * 0.03;
         
-        // Golden color variation
         const r = 255;
-        const g = 200 + Math.floor(Math.random() * 55);
-        const b = 50 + Math.floor(Math.random() * 100);
-        this.color = `rgba(${r}, ${g}, ${b}, ${this.opacity})`;
+        const g = 195 + Math.floor(Math.random() * 45);
+        const b = 80 + Math.floor(Math.random() * 60);
+        this.color = `rgba(${r}, ${g}, ${b}, ${this.opacity * 0.55})`;
       }
       
       update() {
@@ -152,8 +151,8 @@ const CosmicBackground: React.FC = () => {
         
         // Add glow effect
         const gradient = ctx.createRadialGradient(x, y, 0, x, y, this.size * 3);
-        gradient.addColorStop(0, `rgba(255, 215, 0, ${this.opacity * 0.7})`);
-        gradient.addColorStop(1, 'rgba(255, 215, 0, 0)');
+        gradient.addColorStop(0, `rgba(255, 210, 130, ${this.opacity * 0.5})`);
+        gradient.addColorStop(1, 'rgba(255, 210, 130, 0)');
         
         ctx.beginPath();
         ctx.arc(x, y, this.size * 3, 0, Math.PI * 2);
@@ -180,11 +179,10 @@ const CosmicBackground: React.FC = () => {
         this.angle = Math.random() * Math.PI * 2;
         this.rotationSpeed = 0.0005 + Math.random() * 0.001;
         
-        // Color variations - purples, blues, and golds
         const colors = [
-          'rgba(104, 81, 255, 0.2)', // Purple
-          'rgba(70, 130, 180, 0.2)', // Blue
-          'rgba(255, 215, 0, 0.2)',  // Gold
+          'rgba(255, 200, 120, 0.16)',
+          'rgba(200, 210, 230, 0.12)',
+          'rgba(255, 215, 140, 0.14)',
         ];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }

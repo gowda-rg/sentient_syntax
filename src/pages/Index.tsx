@@ -5,7 +5,7 @@ import CosmicBackground from "@/components/CosmicBackground";
 import PortfolioHub from "@/components/PortfolioHub";
 import { useIsMobile } from "@/hooks/use-mobile";
 const IMMERSION_MS = 2000;
-const MOTION_OPACITY = 0.42;
+const MOTION_OPACITY = 0.58;
 
 const Index = () => {
   const [phase, setPhase] = useState<"void" | "descent" | "land">("void");
@@ -39,7 +39,7 @@ const Index = () => {
 
       {(phase === "void" || phase === "descent") && (
         <div className={`void-gate fixed inset-0 z-50 flex items-center justify-center ${phase === "descent" ? "void-gate-fade" : ""}`}>
-          <div className="w-10 h-10 rounded-full border border-darshan-glow/40 border-t-darshan-glow/90 animate-spin" />
+          <div className="w-10 h-10 rounded-full border border-white/15 border-t-white/55 animate-spin" />
         </div>
       )}
 

@@ -6,8 +6,9 @@ Single-screen hub: cosmic background, glass panels, center focus (no long vertic
 
 ## Features
 
-- **Viewport hub** — Overview, Experience, Projects, Skills, Contact via sidebar + tabs; search jumps to a role or project
-- **Horizontal rails** — switch jobs/projects without leaving the center focus
+- **Viewport hub** — Overview, Experience, Projects, **Writing**, Skills, Contact via sidebar + tabs; search jumps to a role, project, or writing destination
+- **Horizontal rails** — switch jobs and code/conceptual projects without leaving the center focus (no Shipped/Active labels; conceptual items use subtle shape cues)
+- **Writing** — Substack and GitHub Pages in their own section (`writingDestinations` in `siteKnowledge.ts`), not duplicated on the project rail
 - **Glass UI** — translucent cards over neural / star / cosmic layers (dark only)
 - **Resume** — `public/Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf` (download from Overview / Contact)
 - **Brand** — `public/favicon.svg` (SS monogram; not the old Lovable `.ico`)
@@ -62,6 +63,17 @@ src/
 ## Deploy
 
 Static output: `dist/`. Ensure `public/` assets (resume, favicon) are included. Set production host to serve `index.html` for SPA routes.
+
+After changes:
+
+```bash
+npm run build
+git add -A
+git commit -m "Describe your change"
+git push origin main
+```
+
+Remote: `https://github.com/gowda-rg/sentient_syntax.git` (`origin/main`).
 
 ## Canonical career data
 

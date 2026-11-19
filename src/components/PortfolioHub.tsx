@@ -4,7 +4,9 @@ import {
   profile,
   employments,
   projectCatalog,
+  projectsForRail,
   skillGroups,
+  writingDestinations,
   type ProjectItem,
 } from "@/content/siteKnowledge";
 
@@ -12,7 +14,8 @@ const card = "hire-card";
 
 type SearchHit =
   | { type: "job"; id: string; title: string; sub: string }
-  | { type: "project"; id: string; title: string; sub: string };
+  | { type: "project"; id: string; title: string; sub: string }
+  | { type: "writing"; id: string; title: string; sub: string };
 
 function buildSearchHits(): SearchHit[] {
   const jobs = employments.map((e) => ({
@@ -25,9 +28,15 @@ function buildSearchHits(): SearchHit[] {
     type: "project" as const,
     id: p.id,
     title: p.name,
-    sub: p.kind,
+    sub: p.stack.slice(0, 2).join(" · "),
   }));
-  return [...jobs, ...projects];
+  const writing = writingDestinations.map((w) => ({
+    type: "writing" as const,
+    id: w.id,
+    title: w.title,
+    sub: "Writing",
+  }));
+  return [...jobs, ...projects, ...writing];
 }
 
 type PortfolioHubProps = {
@@ -55,6 +64,8 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
     if (hit.type === "job") {
       setJobId(hit.id);
       setSection("experience");
+    } else if (hit.type === "writing") {
+      setSection("writing");
     } else {
       setProjectId(hit.id);
       setSection("projects");
@@ -100,7 +111,7 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
             )}
           </div>
           <div className="hub-tabs" role="tablist">
-            {(["home", "experience", "projects", "skills", "contact"] as HubSection[]).map((id) => (
+            {(["home", "experience", "projects", "writing", "skills", "contact"] as HubSection[]).map((id) => (
               <button
                 key={id}
                 type="button"
@@ -109,20 +120,25 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
                 className={`hub-tab ${section === id ? "hub-tab-active" : ""}`}
                 onClick={() => setSection(id)}
               >
-                {id === "home" ? "Overview" : id.charAt(0).toUpperCase() + id.slice(1)}
+                {id === "home"
+                  ? "Overview"
+                  : id === "writing"
+                    ? "Writing"
+                    : id.charAt(0).toUpperCase() + id.slice(1)}
               </button>
             ))}
           </div>
         </header>
 
         <div className="focus-stage" role="tabpanel">
-          {section === "home" && <HomeFocus />}
+          {section === "home" && <HomeFocus onExploreWriting={() => setSection("writing")} />}
           {section === "experience" && job && (
             <ExperienceFocus job={job} jobId={jobId} onSelect={setJobId} />
           )}
           {section === "projects" && project && (
             <ProjectFocus project={project} projectId={projectId} onSelect={setProjectId} />
           )}
+          {section === "writing" && <WritingFocus />}
           {section === "skills" && <SkillsFocus />}
           {section === "contact" && <ContactFocus />}
         </div>
@@ -131,7 +147,7 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
   );
 }
 
-function HomeFocus() {
+function HomeFocus({ onExploreWriting }: { onExploreWriting: () => void }) {
   return (
     <article className={`${card} focus-panel focus-panel--home overview-panel`}>
       <h1 className="hire-display overview-name">{profile.name}</h1>
@@ -157,6 +173,12 @@ function HomeFocus() {
             </span>
           ))}
         </nav>
+        <p className="overview-writing">
+          Essays and notes —{" "}
+          <button type="button" className="overview-writing-btn" onClick={onExploreWriting}>
+            explore writing
+          </button>
+        </p>
       </div>
     </article>
   );
@@ -194,11 +216,11 @@ function ExperienceFocus({
           <button
             key={e.id}
             type="button"
-            className={`rail-chip ${e.id === jobId ? "rail-chip-active" : ""}`}
+            className={`rail-chip rail-chip--stack ${e.id === jobId ? "rail-chip-active" : ""}`}
             onClick={() => onSelect(e.id)}
           >
-            <span className="font-medium text-sm">{e.company}</span>
-            <span className="text-xs hire-muted">{e.period}</span>
+            <span className="rail-chip-title">{e.company}</span>
+            <span className="rail-chip-meta">{e.period}</span>
           </button>
         ))}
       </HorizontalRail>
@@ -219,8 +241,7 @@ function ProjectFocus({
     <div className="focus-stack">
       <article className={`${card} focus-panel focus-panel--detail project-shape project-shape--${project.kind}`}>
         <header>
-          <h2 className="text-xl font-semibold">{project.name}</h2>
-          <p className="text-sm hire-muted mt-1 capitalize">{project.kind} · {project.status}</p>
+          <h2 className="text-xl font-semibold leading-snug">{project.name}</h2>
         </header>
         <p className="hire-body mt-3">{project.description}</p>
         <TagRow tags={project.stack} className="mt-3" />
@@ -232,20 +253,54 @@ function ProjectFocus({
           ))}
         </div>
       </article>
-      <HorizontalRail label="All projects — scroll sideways">
-        {projectCatalog.map((p) => (
+      <HorizontalRail label="Projects — scroll sideways">
+        {projectsForRail().map((p) => (
           <button
             key={p.id}
             type="button"
             className={`rail-chip rail-chip--project project-shape project-shape--${p.kind} ${p.id === projectId ? "rail-chip-active" : ""}`}
             onClick={() => onSelect(p.id)}
+            title={p.name}
           >
-            <span className="font-medium text-sm leading-tight">{p.name}</span>
-            <span className="text-xs hire-muted capitalize">{p.kind}</span>
+            <span className="rail-chip-title">{p.name}</span>
           </button>
         ))}
       </HorizontalRail>
     </div>
+  );
+}
+
+function WritingFocus() {
+  return (
+    <article className={`${card} focus-panel focus-panel--writing`}>
+      <header className="writing-focus-header">
+        <h2 className="hire-section-title text-xl">Explore writing</h2>
+        <p className="hire-body text-sm mt-2">
+          Long-form essays on Substack and published notes on GitHub Pages — separate from code projects.
+        </p>
+      </header>
+      <div className="writing-explore-grid">
+        {writingDestinations.map((w) => (
+          <div
+            key={w.id}
+            className="writing-destination project-shape project-shape--conceptual"
+          >
+            <h3 className="writing-destination-title">{w.title}</h3>
+            <p className="hire-body text-sm mt-2">{w.description}</p>
+            <div className="writing-destination-links">
+              <a href={w.href} target="_blank" rel="noopener noreferrer" className="hire-link">
+                {w.linkLabel}
+              </a>
+              {w.secondaryHref && w.secondaryLabel && (
+                <a href={w.secondaryHref} target="_blank" rel="noopener noreferrer" className="hire-link">
+                  {w.secondaryLabel}
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </article>
   );
 }
 
@@ -256,7 +311,7 @@ function SkillsFocus() {
       <div className="grid grid-cols-2 gap-x-6 gap-y-4">
         {skillGroups.map((g) => (
           <div key={g.label}>
-                <p className="hire-label mb-2">{g.label}</p>
+            <p className="hire-label mb-2">{g.label}</p>
             <TagRow tags={g.items} />
           </div>
         ))}
@@ -287,10 +342,8 @@ function ContactFocus() {
           </a>
         </li>
       </ul>
-      <p className="hire-footer text-left mt-6 pt-4 border-t border-white/10">
-        <a href="https://substack.com/@rgowda" target="_blank" rel="noopener noreferrer">Substack</a>
-        {" · "}
-        <a href="https://gowda-rg.github.io/" target="_blank" rel="noopener noreferrer">GitHub Pages</a>
+      <p className="hire-muted text-sm mt-6 pt-4 border-t border-white/10">
+        For essays and published notes, use the Writing section in the sidebar or toolbar.
       </p>
     </article>
   );

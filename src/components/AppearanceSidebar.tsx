@@ -1,9 +1,10 @@
-export type HubSection = "home" | "experience" | "projects" | "skills" | "contact";
+export type HubSection = "home" | "experience" | "projects" | "writing" | "skills" | "contact";
 
 const sections: { id: HubSection; label: string }[] = [
   { id: "home", label: "Overview" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
+  { id: "writing", label: "Writing" },
   { id: "skills", label: "Skills" },
   { id: "contact", label: "Contact" },
 ];

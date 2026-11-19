@@ -2,7 +2,7 @@
  * Site copy — sync with portfolio-resume/professional-knowledge-base/
  */
 
-export type ProjectKind = "engineering" | "research" | "docs" | "writing" | "site";
+export type ProjectKind = "engineering" | "site" | "conceptual";
 
 export type ProjectLink = {
   label: string;
@@ -13,11 +13,42 @@ export type ProjectItem = {
   id: string;
   name: string;
   kind: ProjectKind;
-  status: string;
   description: string;
   stack: string[];
   links: ProjectLink[];
 };
+
+export type WritingDestination = {
+  id: string;
+  title: string;
+  description: string;
+  href: string;
+  linkLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+};
+
+/** Primary places to read essays and published notes (not mixed into the project rail). */
+export const writingDestinations: WritingDestination[] = [
+  {
+    id: "substack",
+    title: "Substack — RG Gowda",
+    description: "Essays on applied AI, coherence, and human–AI interaction.",
+    href: "https://substack.com/@rgowda",
+    linkLabel: "Read on Substack",
+  },
+  {
+    id: "github-pages",
+    title: "gowda-rg.github.io",
+    description: "Long-form notes and text-heavy docs published on GitHub Pages.",
+    href: "https://gowda-rg.github.io/",
+    linkLabel: "Open site",
+    secondaryHref: "https://github.com/gowda-rg/gowda-rg.github.io",
+    secondaryLabel: "Repository",
+  },
+];
+
+const projectRailExclude = new Set(["substack", "docs-github-io"]);
 
 export const profile = {
   name: "Gowda RG",
@@ -100,7 +131,6 @@ export const projectCatalog: ProjectItem[] = [
     id: "solar",
     name: "Solar Plant Intelligence",
     kind: "engineering",
-    status: "Active",
     description:
       "Telemetry ingestion, validation, and day-ahead forecasting. FastAPI, PostgreSQL, React, scikit-learn.",
     stack: ["Python", "FastAPI", "PostgreSQL", "React", "scikit-learn"],
@@ -110,7 +140,6 @@ export const projectCatalog: ProjectItem[] = [
     id: "3dice",
     name: "Three-Dice Simulation Platform",
     kind: "engineering",
-    status: "Shipped",
     description:
       "Seeded dice runs, permutation outcome taxonomy, SQLite persistence, and analytics UI (TypeScript / Next.js stack).",
     stack: ["TypeScript", "Next.js", "Fastify", "SQLite", "Chart.js"],
@@ -120,7 +149,6 @@ export const projectCatalog: ProjectItem[] = [
     id: "agentiq",
     name: "AgentIQ",
     kind: "engineering",
-    status: "In progress",
     description: "Contact-center–inspired metrics and ML experiments; early repo.",
     stack: ["Python", "Pandas", "FastAPI"],
     links: [{ label: "Repository", href: "https://github.com/gowda-rg/AgentIQ" }],
@@ -129,7 +157,6 @@ export const projectCatalog: ProjectItem[] = [
     id: "sentient-syntax",
     name: "Sentient Syntax",
     kind: "site",
-    status: "Active",
     description: "This portfolio site and structured career content (React, TypeScript, Vite).",
     stack: ["React", "TypeScript", "Vite"],
     links: [
@@ -141,7 +168,6 @@ export const projectCatalog: ProjectItem[] = [
     id: "my-agent",
     name: "My-Agent / professional knowledge base",
     kind: "engineering",
-    status: "In progress",
     description: "Structured professional knowledge, portfolio outputs, and future disclosed interview representative.",
     stack: ["React", "Python", "RAG"],
     links: [
@@ -152,8 +178,7 @@ export const projectCatalog: ProjectItem[] = [
   {
     id: "postsymbolic",
     name: "PostSymbolic Alignment Framework",
-    kind: "research",
-    status: "Research prototype",
+    kind: "conceptual",
     description: "Longitudinal human–AI interaction and semantic alignment experiments.",
     stack: ["Python", "LLM APIs"],
     links: [{ label: "Repository", href: "https://github.com/gowda-ss/PostSymbolic-Alignment-Framework" }],
@@ -161,27 +186,24 @@ export const projectCatalog: ProjectItem[] = [
   {
     id: "fourth-word",
     name: "Fourth Word",
-    kind: "research",
-    status: "Research prototype",
+    kind: "conceptual",
     description: "Exploration tied to Substack essays and coherence-oriented LLM use.",
-    stack: ["Documentation", "LLM workflows"],
+    stack: ["Essays", "LLM workflows"],
     links: [{ label: "Repository", href: "https://github.com/gowda-rg/fourth_word" }],
   },
   {
     id: "perceptual-anchoring",
     name: "Perceptual Anchoring",
-    kind: "research",
-    status: "Research prototype",
+    kind: "conceptual",
     description: "Human-centered framing for stable perception in long AI sessions.",
-    stack: ["Research notes", "Prototypes"],
+    stack: ["Notes", "Prototypes"],
     links: [{ label: "Repository", href: "https://github.com/gowda-ss/perceptual-anchoring" }],
   },
   {
     id: "docs-github-io",
-    name: "GitHub Pages documentation",
-    kind: "docs",
-    status: "Published",
-    description: "Text-heavy documentation and research notes (gowda-rg.github.io source repo).",
+    name: "gowda-rg.github.io",
+    kind: "conceptual",
+    description: "Text-heavy docs and notes (GitHub Pages source repo).",
     stack: ["Markdown", "GitHub Pages"],
     links: [
       { label: "Site", href: "https://gowda-rg.github.io/" },
@@ -191,19 +213,19 @@ export const projectCatalog: ProjectItem[] = [
   {
     id: "substack",
     name: "Substack — RG Gowda",
-    kind: "writing",
-    status: "Ongoing",
+    kind: "conceptual",
     description: "Essays on applied AI, coherence, and human–AI interaction.",
     stack: ["Writing"],
     links: [{ label: "Substack", href: "https://substack.com/@rgowda" }],
   },
 ];
 
-export const projectSections: { title: string; kinds: ProjectKind[] }[] = [
-  { title: "Engineering & apps", kinds: ["engineering", "site"] },
-  { title: "Research repositories", kinds: ["research"] },
-  { title: "Documentation & writing", kinds: ["docs", "writing"] },
-];
+/** Software first, then conceptual repos — single sideways rail (hub writing links stay separate). */
+export function projectsForRail(): ProjectItem[] {
+  const software = projectCatalog.filter((p) => p.kind === "engineering" || p.kind === "site");
+  const conceptual = projectCatalog.filter((p) => p.kind === "conceptual");
+  return [...software, ...conceptual.filter((p) => !projectRailExclude.has(p.id))];
+}
 
 export const skillGroups = [
   { label: "Frontend", items: ["React", "JavaScript", "TypeScript"] },

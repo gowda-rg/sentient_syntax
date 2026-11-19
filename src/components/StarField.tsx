@@ -36,8 +36,8 @@ const StarField: React.FC = () => {
     };
     
     const createStar = (id: number, windowWidth: number): Star => {
-      const isText = Math.random() > 0.7; // 30% chance for text star
-      const colors = ['#6851FF', '#8E78FF', '#FFFFFF'];
+      const isText = false; // hiring UI: visual stars only, no floating quotes
+      const colors = ['#f2f3f8', '#c9c2f5', '#9b8cff'];
       const colorIndex = Math.floor(Math.random() * colors.length);
       
       return {

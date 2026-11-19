@@ -1,73 +1,72 @@
-# Welcome to your Lovable project
+# sentient_syntax
 
-## Project info
+**Sentient Syntax** — hiring portfolio for [sentientsyntax.com](https://www.sentientsyntax.com/).
 
-**URL**: https://lovable.dev/projects/d846381b-1d37-41a0-9584-b7270eea6795
+Single-screen hub: cosmic background, glass panels, center focus (no long vertical resume page). Copy aligns with `../portfolio-resume/professional-knowledge-base/` in the monorepo workspace.
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- **Viewport hub** — Overview, Experience, Projects, Skills, Contact via sidebar + tabs; search jumps to a role or project
+- **Horizontal rails** — switch jobs/projects without leaving the center focus
+- **Glass UI** — translucent cards over neural / star / cosmic layers (dark only)
+- **Resume** — `public/Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf` (download from Overview / Contact)
+- **Brand** — `public/favicon.svg` (SS monogram; not the old Lovable `.ico`)
 
-**Use Lovable**
+## Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d846381b-1d37-41a0-9584-b7270eea6795) and start prompting.
+| Layer | Choice |
+|-------|--------|
+| Build | Vite 5 + `@vitejs/plugin-react-swc` |
+| UI | React 18, TypeScript, React Router 6 |
+| Styling | Tailwind 3 (`darshan` tokens + CSS variables in `src/index.css`) |
+| Toasts | Sonner |
 
-Changes made via Lovable will be committed automatically to this repo.
+Removed from the original Lovable scaffold: shadcn/Radix bulk, Supabase, TanStack Query, admin route.
 
-**Use your preferred IDE**
+## Develop
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+npm install
+npm run dev      # http://localhost:8080 (host: true for LAN)
+npm run build    # tsc -p tsconfig.app.json + vite build → dist/
+npm run preview
+npm run lint
 ```
 
-**Edit a file directly in GitHub**
+Node: see `.nvmrc` (LTS recommended).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Project layout
 
-**Use GitHub Codespaces**
+```
+public/
+  favicon.svg
+  Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf
+src/
+  content/siteKnowledge.ts    # Site copy (sync from PKB)
+  components/
+    PortfolioHub.tsx            # Main hub UI
+    AppearanceSidebar.tsx     # Section nav + brand
+    NeuralBackground.tsx, StarField.tsx, CosmicBackground.tsx
+  pages/Index.tsx             # Background + immersion gate
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Config
 
-## What technologies are used for this project?
+| File | Role |
+|------|------|
+| `tsconfig.app.json` | App typecheck (`npm run build`) |
+| `tsconfig.json` | Project references only |
+| `vite.config.ts` | Port 8080, `@/` → `src/` |
+| `tailwind.config.ts` | `darshan` color scales |
 
-This project is built with:
+## Deploy
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Static output: `dist/`. Ensure `public/` assets (resume, favicon) are included. Set production host to serve `index.html` for SPA routes.
 
-## How can I deploy this project?
+## Canonical career data
 
-Simply open [Lovable](https://lovable.dev/projects/d846381b-1d37-41a0-9584-b7270eea6795) and click on Share -> Publish.
+Edit `portfolio-resume/professional-knowledge-base/`, then update `src/content/siteKnowledge.ts` (ingest script planned for v1.1).
 
-## Can I connect a custom domain to my Lovable project?
+## License
 
-Yes it is!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Personal project — Gowda RG.

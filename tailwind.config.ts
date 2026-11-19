@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -18,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -52,24 +57,14 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				},
 				darshan: {
-					dark: '#0c0b1d',
-					deep: '#0e1428',
-					cosmic: '#2a1758',
-					void: '#121212',
-					accent: '#6851FF',
-					glow: '#8E78FF',
-					text: '#F1F1F1'
+					deep: 'rgb(36 48 73 / <alpha-value>)',
+					cosmic: 'rgb(61 74 114 / <alpha-value>)',
+					mist: 'rgb(74 85 128 / <alpha-value>)',
+					surface: 'rgb(54 65 99 / <alpha-value>)',
+					accent: 'rgb(109 92 232 / <alpha-value>)',
+					glow: 'rgb(155 140 255 / <alpha-value>)',
+					text: 'rgb(242 243 248 / <alpha-value>)',
 				}
 			},
 			borderRadius: {
@@ -138,5 +133,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate],
 } satisfies Config;

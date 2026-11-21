@@ -57,15 +57,40 @@ export const siteBrand = {
   logoAlt: "Sentient Syntax",
 };
 
+/** Disclosed AI interview rep — planned; aligns with PKB PRJ-004 / resume. Not live chat yet. */
+export const interviewRepresentative = {
+  title: "AI interview representative",
+  badge: "Coming soon",
+  summary:
+    "A disclosed AI representative grounded in documented experience, projects, and evidence—not a substitute for speaking with me directly.",
+  forHiring: [
+    "Explore role fit using structured career data and cited project context.",
+    "Ask about stack, employment history, and selected engineering work.",
+    "Clearly labeled as AI; answers tied to portfolio sources where possible.",
+  ],
+  notYet: [
+    "Live conversational interview is not enabled on this site yet.",
+    "No impersonation—the representative will always be disclosed as AI.",
+  ],
+  now: {
+    label: "Until this is live",
+    items: [
+      "Download the resume (PDF) from Overview or Contact.",
+      "Email or LinkedIn to schedule a conversation with Darshan RG.",
+    ],
+  },
+  pkRef: "My-Agent / professional knowledge base (in progress)",
+};
+
 export const profile = {
   name: "Darshan RG",
   title: "Full Stack AI Engineer",
-  subtitle: "React · REST · SQL · Python ML · Applied AI",
+  subtitle: "React · REST · MySQL · Python ML · Applied AI",
   location: "Bengaluru, India",
   email: "darshanrgs45@gmail.com",
   linkedin: "https://www.linkedin.com/in/gowda-rg/",
   summary:
-    "Full-stack engineer with production contact-center experience at Tevatel (React portals, telephony REST, SQL CRM). Independent work spans ML telemetry, simulation platforms, portfolio systems, and documented research repos.",
+    "Full Stack AI Engineer with production experience at Tevatel, developing React-based portals, integrating telephony REST APIs, and working with SQL-backed CRM systems. Builds independent solutions across machine learning, telemetry analytics, simulation platforms, and applied AI, combining full-stack engineering with practical ML experimentation and research-driven development.",
   resumeFile: "/Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf",
   resumeLabel: "Download resume (PDF)",
   links: [
@@ -79,6 +104,7 @@ export const employments = [
   {
     id: "tevatel",
     company: "Tevatel",
+    companyUrl: "https://tevatel.com/",
     role: "Full Stack Developer",
     period: "Oct 2023 – Aug 2024",
     location: "Chennai",
@@ -89,14 +115,15 @@ export const employments = [
       "Built SQL-backed features: lists, filters, dashboards, call logs, and CRM-style modules.",
       "Worked with telephony dialer APIs (click-to-call, agent status, call disposition).",
     ],
-    stack: ["React", "JavaScript", "REST APIs", "SQL", "MySQL"],
+    stack: ["React", "JavaScript", "REST APIs", "NodeJS", "MySQL"],
   },
   {
     id: "glucowear",
     company: "Office Solution AI Labs",
+    companyUrl: "https://innovationalofficesolution.com/",
     role: "Backend Developer Intern",
     period: "Jul – Sep 2023",
-    location: "Remote",
+    location: "Bengaluru",
     product: "GlucoWear — wearable app backend (foundations)",
     bullets: [
       "Set up Node/Express backend structure, schemas, and API scaffolding from design documents.",
@@ -107,10 +134,11 @@ export const employments = [
   {
     id: "10x",
     company: "10x Academy",
+    companyUrl: "https://www.the10xacademy.com/",
     role: "Full Stack Training & Peer Mentoring",
     period: "Jun 2022 – Jun 2023",
     location: "Hyderabad",
-    product: "Training program (not employment)",
+    product: "Structured full-stack training program",
     bullets: [
       "Completed full-stack and DSA curriculum; built assignment and portfolio projects.",
       "Mentored newer batches in one-to-one technical sessions.",
@@ -120,7 +148,8 @@ export const employments = [
   {
     id: "dot",
     company: "(dot).efficiently",
-    role: "Project Estimation Associate",
+    companyUrl: "https://efficiently.com/",
+    role: "Estimation Associate",
     period: "Sep 2021 – Apr 2022",
     location: "Hyderabad",
     product: "US construction quantity takeoffs",
@@ -159,6 +188,7 @@ export const projectCatalog: ProjectItem[] = [
     description: "Contact-center–inspired metrics and ML experiments; early repo.",
     stack: ["Python", "Pandas", "FastAPI"],
     links: [{ label: "Repository", href: "https://github.com/gowda-rg/AgentIQ" }],
+
   },
   {
     id: "sentient-syntax",
@@ -175,7 +205,8 @@ export const projectCatalog: ProjectItem[] = [
     id: "my-agent",
     name: "My-Agent / professional knowledge base",
     kind: "engineering",
-    description: "Structured professional knowledge, portfolio outputs, and future disclosed interview representative.",
+    description:
+      "Structured professional knowledge and portfolio outputs; disclosed interview representative planned (see Interview section).",
     stack: ["React", "Python", "RAG"],
     links: [
       { label: "Repository", href: "https://github.com/gowda-rg/sentient_syntax" },
@@ -236,7 +267,7 @@ export function projectsForRail(): ProjectItem[] {
 
 export const skillGroups = [
   { label: "Frontend", items: ["React", "JavaScript", "TypeScript"] },
-  { label: "Backend", items: ["Node.js", "Express", "FastAPI", "REST APIs"] },
-  { label: "Data", items: ["SQL", "PostgreSQL", "MongoDB", "Pandas"] },
+  { label: "Backend", items: ["Node.js", "Express", "FastAPI", "Fastify", "REST APIs"] },
+  { label: "Data", items: ["MySQL", "PostgreSQL", "MongoDB", "Pandas"] },
   { label: "ML", items: ["scikit-learn", "Time-series basics"] },
 ];

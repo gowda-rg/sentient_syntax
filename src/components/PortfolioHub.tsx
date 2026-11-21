@@ -7,6 +7,7 @@ import {
   projectsForRail,
   skillGroups,
   writingDestinations,
+  interviewRepresentative,
   siteBrand,
   type ProjectItem,
 } from "@/content/siteKnowledge";
@@ -16,7 +17,8 @@ const card = "hire-card";
 type SearchHit =
   | { type: "job"; id: string; title: string; sub: string }
   | { type: "project"; id: string; title: string; sub: string }
-  | { type: "writing"; id: string; title: string; sub: string };
+  | { type: "writing"; id: string; title: string; sub: string }
+  | { type: "interview"; id: string; title: string; sub: string };
 
 function buildSearchHits(): SearchHit[] {
   const jobs = employments.map((e) => ({
@@ -37,7 +39,15 @@ function buildSearchHits(): SearchHit[] {
     title: w.title,
     sub: "Writing",
   }));
-  return [...jobs, ...projects, ...writing];
+  const interview = [
+    {
+      type: "interview" as const,
+      id: "interview",
+      title: interviewRepresentative.title,
+      sub: interviewRepresentative.badge,
+    },
+  ];
+  return [...jobs, ...projects, ...writing, ...interview];
 }
 
 type PortfolioHubProps = {
@@ -67,6 +77,8 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
       setSection("experience");
     } else if (hit.type === "writing") {
       setSection("writing");
+    } else if (hit.type === "interview") {
+      setSection("interview");
     } else {
       setProjectId(hit.id);
       setSection("projects");
@@ -123,27 +135,28 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
             )}
           </div>
           <div className="hub-tabs hidden md:flex" role="tablist">
-            {(["home", "experience", "projects", "writing", "skills", "contact"] as HubSection[]).map((id) => (
+            {hubSections.map((s) => (
               <button
-                key={id}
+                key={s.id}
                 type="button"
                 role="tab"
-                aria-selected={section === id}
-                className={`hub-tab ${section === id ? "hub-tab-active" : ""}`}
-                onClick={() => setSection(id)}
+                aria-selected={section === s.id}
+                className={`hub-tab ${section === s.id ? "hub-tab-active" : ""}`}
+                onClick={() => setSection(s.id)}
               >
-                {id === "home"
-                  ? "Overview"
-                  : id === "writing"
-                    ? "Writing"
-                    : id.charAt(0).toUpperCase() + id.slice(1)}
+                {s.label}
               </button>
             ))}
           </div>
         </header>
 
         <div className="focus-stage" role="tabpanel">
-          {section === "home" && <HomeFocus onExploreWriting={() => setSection("writing")} />}
+          {section === "home" && (
+            <HomeFocus
+              onExploreWriting={() => setSection("writing")}
+              onExploreInterview={() => setSection("interview")}
+            />
+          )}
           {section === "experience" && job && (
             <ExperienceFocus job={job} jobId={jobId} onSelect={setJobId} />
           )}
@@ -152,7 +165,8 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
           )}
           {section === "writing" && <WritingFocus />}
           {section === "skills" && <SkillsFocus />}
-          {section === "contact" && <ContactFocus />}
+          {section === "interview" && <InterviewFocus onContact={() => setSection("contact")} />}
+          {section === "contact" && <ContactFocus onInterview={() => setSection("interview")} />}
         </div>
       </div>
 
@@ -176,7 +190,13 @@ export default function PortfolioHub({ immersed = true }: PortfolioHubProps) {
   );
 }
 
-function HomeFocus({ onExploreWriting }: { onExploreWriting: () => void }) {
+function HomeFocus({
+  onExploreWriting,
+  onExploreInterview,
+}: {
+  onExploreWriting: () => void;
+  onExploreInterview: () => void;
+}) {
   return (
     <article className={`${card} focus-panel focus-panel--home overview-panel`}>
       <h1 className="hire-display overview-name">{profile.name}</h1>
@@ -207,6 +227,10 @@ function HomeFocus({ onExploreWriting }: { onExploreWriting: () => void }) {
           <button type="button" className="overview-writing-btn" onClick={onExploreWriting}>
             explore writing
           </button>
+          {" · "}
+          <button type="button" className="overview-writing-btn" onClick={onExploreInterview}>
+            AI interview rep (soon)
+          </button>
         </p>
       </div>
     </article>
@@ -227,11 +251,29 @@ function ExperienceFocus({
       <article className={`${card} focus-panel focus-panel--detail`}>
         <header className="space-y-1">
           <div className="flex flex-wrap justify-between gap-2 items-baseline">
-            <h2 className="text-xl font-semibold text-[var(--fg)]">{job.company}</h2>
+            {job.companyUrl ? (
+              <a
+                href={job.companyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xl font-semibold text-[var(--fg)] hire-link experience-company-link"
+              >
+                {job.company}
+              </a>
+            ) : (
+              <h2 className="text-xl font-semibold text-[var(--fg)]">{job.company}</h2>
+            )}
             <span className="text-sm hire-muted tabular-nums">{job.period}</span>
           </div>
           <p className="hire-subhead">{job.role}</p>
-          <p className="text-sm hire-muted">{job.location} · {job.product}</p>
+          <p className="text-sm hire-muted experience-meta">
+            <span>{job.location}</span>
+            <span className="experience-meta-sep" aria-hidden>
+              {" "}
+              ·{" "}
+            </span>
+            <span>{job.product}</span>
+          </p>
         </header>
         <ul className="list-disc pl-5 mt-4 space-y-1.5 hire-body">
           {job.bullets.map((b) => (
@@ -333,6 +375,47 @@ function WritingFocus() {
   );
 }
 
+function InterviewFocus({ onContact }: { onContact: () => void }) {
+  const ir = interviewRepresentative;
+  return (
+    <article className={`${card} focus-panel focus-panel--compact interview-panel`}>
+      <div className="interview-panel-header">
+        <h2 className="hire-section-title text-xl">{ir.title}</h2>
+        <span className="hire-badge">{ir.badge}</span>
+      </div>
+      <p className="hire-body mt-3">{ir.summary}</p>
+
+      <h3 className="hire-label mt-5 mb-2">Planned for hiring teams</h3>
+      <ul className="list-disc pl-5 space-y-1.5 hire-body text-sm">
+        {ir.forHiring.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
+
+      <h3 className="hire-label mt-4 mb-2">Not available yet</h3>
+      <ul className="list-disc pl-5 space-y-1.5 hire-body text-sm hire-muted">
+        {ir.notYet.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
+
+      <div className="mt-5 pt-4 border-t border-white/10">
+        <p className="hire-label mb-2">{ir.now.label}</p>
+        <ul className="list-disc pl-5 space-y-1 hire-body text-sm">
+          {ir.now.items.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+        <button type="button" className="hire-button mt-4 text-sm" onClick={onContact}>
+          Go to contact
+        </button>
+      </div>
+
+      <p className="text-xs hire-muted mt-4">{ir.pkRef}</p>
+    </article>
+  );
+}
+
 function SkillsFocus() {
   return (
     <article className={`${card} focus-panel focus-panel--compact`}>
@@ -349,7 +432,7 @@ function SkillsFocus() {
   );
 }
 
-function ContactFocus() {
+function ContactFocus({ onInterview }: { onInterview: () => void }) {
   return (
     <article className={`${card} focus-panel focus-panel--compact`}>
       <h2 className="hire-section-title text-xl mb-3">Contact</h2>
@@ -372,7 +455,10 @@ function ContactFocus() {
         </li>
       </ul>
       <p className="hire-muted text-sm mt-6 pt-4 border-t border-white/10">
-        For essays and published notes, use the Writing section in the sidebar or toolbar.
+        <button type="button" className="overview-writing-btn" onClick={onInterview}>
+          AI interview representative
+        </button>{" "}
+        ({interviewRepresentative.badge.toLowerCase()}) · Writing section for essays and notes.
       </p>
     </article>
   );

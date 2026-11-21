@@ -1,13 +1,21 @@
 import { siteBrand } from "@/content/siteKnowledge";
 
-export type HubSection = "home" | "experience" | "projects" | "writing" | "skills" | "contact";
+export type HubSection =
+  | "home"
+  | "experience"
+  | "projects"
+  | "writing"
+  | "skills"
+  | "interview"
+  | "contact";
 
 export const hubSections: { id: HubSection; label: string; shortLabel: string }[] = [
   { id: "home", label: "Overview", shortLabel: "Home" },
   { id: "experience", label: "Experience", shortLabel: "Work" },
   { id: "projects", label: "Projects", shortLabel: "Projects" },
-  { id: "writing", label: "Writing", shortLabel: "Writing" },
+  { id: "writing", label: "Writing", shortLabel: "Write" },
   { id: "skills", label: "Skills", shortLabel: "Skills" },
+  { id: "interview", label: "Interview", shortLabel: "Rep" },
   { id: "contact", label: "Contact", shortLabel: "Contact" },
 ];
 

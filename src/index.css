@@ -253,6 +253,291 @@
     line-height: 1.65;
     margin-top: 1.25rem;
     color: var(--fg-soft);
+    text-wrap: pretty;
+    overflow-wrap: anywhere;
+  }
+
+  .experience-meta {
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .interview-panel-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .interview-panel .hire-badge {
+    font-size: 0.625rem;
+  }
+
+  .experience-company-link {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .note-collector-root {
+    position: fixed;
+    z-index: 55;
+    bottom: max(4.75rem, calc(12vh + env(safe-area-inset-bottom, 0px)));
+    left: max(0.5rem, env(safe-area-inset-left, 0px));
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 0.45rem;
+    max-width: min(20rem, 92vw);
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    .note-collector-root {
+      bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+      left: max(1rem, env(safe-area-inset-left, 0px));
+    }
+  }
+
+  .note-collector-fab,
+  .note-collector-panel {
+    pointer-events: auto;
+  }
+
+  .note-collector-fab {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--fg-accent) 32%, transparent);
+    background: color-mix(in srgb, var(--void-base) 78%, transparent);
+    color: var(--fg-soft);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+  }
+
+  .note-collector-fab:hover {
+    color: var(--fg-accent);
+  }
+
+  .note-collector-panel {
+    width: min(20rem, 92vw);
+    max-height: min(48vh, 380px);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .note-collector-header {
+    padding: 0.65rem 0.75rem 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .note-collector-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .note-collector-hint {
+    font-size: 0.625rem;
+    line-height: 1.35;
+    color: var(--fg-muted);
+    margin-top: 0.15rem;
+  }
+
+  .note-collector-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 0 0.75rem 0.5rem;
+  }
+
+  .note-collector-empty {
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+    padding: 0.5rem 0;
+  }
+
+  .note-collector-copy-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem 0.75rem;
+    padding: 0.5rem 0 0.25rem;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 0.35rem;
+  }
+
+  .note-collector-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .note-collector-item {
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .note-collector-item-text {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--fg-soft);
+    text-wrap: pretty;
+  }
+
+  .note-collector-item-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem 0.65rem;
+    margin-top: 0.25rem;
+    align-items: center;
+  }
+
+  .note-collector-compose {
+    flex-shrink: 0;
+    padding: 0.55rem 0.75rem 0.65rem;
+    border-top: 1px solid var(--glass-border);
+    background: color-mix(in srgb, var(--void-base) 55%, transparent);
+  }
+
+  .note-collector-input {
+    font-size: 0.8125rem;
+    min-height: 2.75rem;
+    resize: none;
+    width: 100%;
+  }
+
+  .note-collector-compose-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 0.35rem;
+  }
+
+  .note-collector-save {
+    padding: 0;
+    border: none;
+    background: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .note-collector-save:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .note-collector-kbd {
+    font-size: 0.625rem;
+  }
+
+  .participatory-line-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    pointer-events: none;
+    overflow: visible;
+  }
+
+  .participatory-line {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    width: min(8.75rem, 26vw);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(0.68rem, 2.1vw, 0.78rem);
+    line-height: 1.22;
+    letter-spacing: 0.01em;
+    color: rgba(238, 228, 210, 0.72);
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    will-change: transform, opacity;
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  /* Falls — upper gutter (below toolbar, away from center card) */
+  .participatory-line--fall-fast,
+  .participatory-line--fall-medium,
+  .participatory-line--fall-slow {
+    top: max(4.25rem, 11vh);
+    left: 6%;
+    text-align: left;
+    transform: translateY(0);
+  }
+
+  /* Rises — lower gutter (above bottom nav / page edge) */
+  .participatory-line--rise-fast,
+  .participatory-line--rise-medium,
+  .participatory-line--rise-slow {
+    bottom: max(4.5rem, 12vh);
+    right: 5%;
+    left: auto;
+    top: auto;
+    text-align: right;
+    transform: translateY(0);
+  }
+
+  @media (min-width: 768px) {
+    .participatory-line--fall-fast,
+    .participatory-line--fall-medium,
+    .participatory-line--fall-slow {
+      left: auto;
+      right: max(1.25rem, 4vw);
+      top: max(5.5rem, 12vh);
+      text-align: right;
+    }
+
+    .participatory-line--rise-fast,
+    .participatory-line--rise-medium,
+    .participatory-line--rise-slow {
+      right: auto;
+      left: max(15.5rem, 14vw);
+      bottom: max(2.5rem, 8vh);
+      text-align: left;
+    }
+  }
+
+  .participatory-line--fall-fast {
+    animation: participatory-meteor-fast 4.2s ease-in both;
+  }
+
+  .participatory-line--fall-medium {
+    animation: participatory-meteor-medium 5.6s ease-in-out both;
+  }
+
+  .participatory-line--fall-slow {
+    animation: participatory-meteor-slow 7.2s ease-out both;
+  }
+
+  .participatory-line--rise-fast {
+    animation: participatory-arise-fast 4.8s ease-out both;
+  }
+
+  .participatory-line--rise-medium {
+    animation: participatory-arise-medium 6.4s ease-in-out both;
+  }
+
+  .participatory-line--rise-slow {
+    animation: participatory-arise-slow 8.2s ease-in both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .participatory-line--fall-fast,
+    .participatory-line--fall-medium,
+    .participatory-line--fall-slow,
+    .participatory-line--rise-fast,
+    .participatory-line--rise-medium,
+    .participatory-line--rise-slow {
+      animation: participatory-line-fade 6.5s ease-in-out both;
+    }
   }
 
   .overview-actions {
@@ -564,7 +849,7 @@
 
   .hub-bottom-nav {
     @apply shrink-0 grid z-50 border-t;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     gap: 0.15rem;
     padding: 0.35rem 0.25rem;
     padding-bottom: max(0.35rem, env(safe-area-inset-bottom, 0px));
@@ -748,6 +1033,108 @@
 
   .hire-footer a:hover {
     color: var(--fg);
+  }
+}
+
+/* Participatory lines — keyframes must live outside @layer or animations resolve to "none". */
+@keyframes participatory-meteor-fast {
+  0% {
+    transform: translateY(-2.5vh);
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.78;
+  }
+  100% {
+    transform: translateY(9vh);
+    opacity: 0;
+  }
+}
+
+@keyframes participatory-meteor-medium {
+  0% {
+    transform: translateY(-2vh);
+    opacity: 0;
+  }
+  16% {
+    opacity: 0.72;
+  }
+  100% {
+    transform: translateY(11vh);
+    opacity: 0;
+  }
+}
+
+@keyframes participatory-meteor-slow {
+  0% {
+    transform: translateY(-1.5vh);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.68;
+  }
+  100% {
+    transform: translateY(13vh);
+    opacity: 0;
+  }
+}
+
+@keyframes participatory-arise-fast {
+  0% {
+    transform: translateY(7vh);
+    opacity: 0;
+  }
+  14% {
+    opacity: 0.76;
+  }
+  100% {
+    transform: translateY(-5vh);
+    opacity: 0;
+  }
+}
+
+@keyframes participatory-arise-medium {
+  0% {
+    transform: translateY(8vh);
+    opacity: 0;
+  }
+  16% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-6.5vh);
+    opacity: 0;
+  }
+}
+
+@keyframes participatory-arise-slow {
+  0% {
+    transform: translateY(9vh);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(-8vh);
+    opacity: 0;
+  }
+}
+
+@keyframes participatory-line-fade {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.7;
+  }
+  82% {
+    opacity: 0.62;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
   }
 }
 

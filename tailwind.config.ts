@@ -9,6 +9,14 @@ export default {
 		"./app/**/*.{ts,tsx}",
 		"./src/**/*.{ts,tsx}",
 	],
+	safelist: [
+		"participatory-line--fall-fast",
+		"participatory-line--fall-medium",
+		"participatory-line--fall-slow",
+		"participatory-line--rise-fast",
+		"participatory-line--rise-medium",
+		"participatory-line--rise-slow",
+	],
 	prefix: "",
 	theme: {
 		container: {

@@ -187,7 +187,7 @@ export const projectCatalog: ProjectItem[] = [
     kind: "engineering",
     description: "Contact-center–inspired metrics and ML experiments; early repo.",
     stack: ["Python", "Pandas", "FastAPI"],
-    links: [{ label: "Repository", href: "https://github.com/gowda-rg/AgentIQ" }],
+    links: [],
 
   },
   {

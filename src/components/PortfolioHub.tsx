@@ -316,13 +316,15 @@ function ProjectFocus({
         </header>
         <p className="hire-body mt-3">{project.description}</p>
         <TagRow tags={project.stack} className="mt-3" />
-        <div className="flex flex-wrap gap-3 mt-4">
-          {project.links.map((l) => (
-            <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="hire-link">
-              {l.label}
-            </a>
-          ))}
-        </div>
+        {project.links.length > 0 && (
+          <div className="flex flex-wrap gap-3 mt-4">
+            {project.links.map((l) => (
+              <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="hire-link">
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
       </article>
       <HorizontalRail label="Projects — scroll sideways">
         {projectsForRail().map((p) => (
@@ -440,12 +442,12 @@ function ContactFocus({ onInterview }: { onInterview: () => void }) {
       <ul className="space-y-3">
         <li>
           <a href={`mailto:${profile.email}`} className="hire-link text-base">
-            {profile.email}
+            Email
           </a>
         </li>
         <li>
           <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hire-link text-base">
-            LinkedIn — linkedin.com/in/gowda-rg
+            LinkedIn
           </a>
         </li>
         <li>

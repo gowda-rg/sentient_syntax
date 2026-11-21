@@ -6,7 +6,7 @@ Maintain this SPA portal. **Career truth** lives in `../portfolio-resume/profess
 
 ## Rules
 
-- **Public ship:** commits and live copy stay neutral — see `../.cursor/rules/public-artifacts.mdc`, `../AGENTS.md`, skill `public-ship` (`~/.cursor/skills/public-ship/SKILL.md` + `agent-drills.md`).
+- **Public ship:** commits and live copy stay neutral — see `../.cursor/rules/public-artifacts.mdc`, `../AGENTS.md`, skill `public-ship` (`~/.cursor/skills/public-ship/SKILL.md` + `agent-drills.md`). This site is **hiring-forward** (experience, projects, contact) without **defensive** meta (“not a substitute”, “for recruiters”, answerable disclaimers).
 - Do not claim live RAG or interview chat until implemented with disclosure + citations.
 - Preserve entry UX: void (first visit) → hub grid → room → back.
 - Keep dependencies minimal; no re-adding full shadcn without need.

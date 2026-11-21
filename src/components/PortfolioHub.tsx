@@ -229,7 +229,7 @@ function HomeFocus({
           </button>
           {" · "}
           <button type="button" className="overview-writing-btn" onClick={onExploreInterview}>
-            AI interview rep (soon)
+            Interview rep (soon)
           </button>
         </p>
       </div>
@@ -387,24 +387,24 @@ function InterviewFocus({ onContact }: { onContact: () => void }) {
       </div>
       <p className="hire-body mt-3">{ir.summary}</p>
 
-      <h3 className="hire-label mt-5 mb-2">Planned for hiring teams</h3>
+      <h3 className="hire-label mt-5 mb-2">Planned capabilities</h3>
       <ul className="list-disc pl-5 space-y-1.5 hire-body text-sm">
-        {ir.forHiring.map((line) => (
+        {ir.planned.map((line) => (
           <li key={line}>{line}</li>
         ))}
       </ul>
 
-      <h3 className="hire-label mt-4 mb-2">Not available yet</h3>
+      <h3 className="hire-label mt-4 mb-2">Release status</h3>
       <ul className="list-disc pl-5 space-y-1.5 hire-body text-sm hire-muted">
-        {ir.notYet.map((line) => (
+        {ir.releaseStatus.map((line) => (
           <li key={line}>{line}</li>
         ))}
       </ul>
 
       <div className="mt-5 pt-4 border-t border-white/10">
-        <p className="hire-label mb-2">{ir.now.label}</p>
+        <p className="hire-label mb-2">{ir.availableNow.label}</p>
         <ul className="list-disc pl-5 space-y-1 hire-body text-sm">
-          {ir.now.items.map((line) => (
+          {ir.availableNow.items.map((line) => (
             <li key={line}>{line}</li>
           ))}
         </ul>
@@ -438,7 +438,7 @@ function ContactFocus({ onInterview }: { onInterview: () => void }) {
   return (
     <article className={`${card} focus-panel focus-panel--compact`}>
       <h2 className="hire-section-title text-xl mb-3">Contact</h2>
-      <p className="hire-body mb-4">Email or LinkedIn for hiring and engineering conversations.</p>
+      <p className="hire-body mb-4">Email or LinkedIn for engineering and role conversations.</p>
       <ul className="space-y-3">
         <li>
           <a href={`mailto:${profile.email}`} className="hire-link text-base">

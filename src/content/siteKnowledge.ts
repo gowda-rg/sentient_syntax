@@ -57,29 +57,29 @@ export const siteBrand = {
   logoAlt: "Sentient Syntax",
 };
 
-/** Disclosed AI interview rep — planned; aligns with PKB PRJ-004 / resume. Not live chat yet. */
+/** Interview rep — PKB PRJ-004; UI honest about coming-soon; no live chat until shipped. */
 export const interviewRepresentative = {
   title: "AI interview representative",
   badge: "Coming soon",
   summary:
-    "A disclosed AI representative grounded in documented experience, projects, and evidence—not a substitute for speaking with me directly.",
-  forHiring: [
-    "Explore role fit using structured career data and cited project context.",
-    "Ask about stack, employment history, and selected engineering work.",
-    "Clearly labeled as AI; answers tied to portfolio sources where possible.",
+    "Grounded Q&A over documented experience, projects, and evidence — AI-labeled, with answers tied to cited portfolio sources.",
+  planned: [
+    "Role-fit exploration from structured career data and project context.",
+    "Questions on stack, employment history, and selected engineering work.",
+    "Cited responses from portfolio and knowledge-base sources.",
   ],
-  notYet: [
-    "Live conversational interview is not enabled on this site yet.",
-    "No impersonation—the representative will always be disclosed as AI.",
+  releaseStatus: [
+    "Conversational UI arrives in a future release.",
+    "All responses labeled as AI-generated.",
   ],
-  now: {
-    label: "Until this is live",
+  availableNow: {
+    label: "Available now",
     items: [
-      "Download the resume (PDF) from Overview or Contact.",
-      "Email or LinkedIn to schedule a conversation with Darshan RG.",
+      "Resume (PDF) on Overview and Contact.",
+      "Email or LinkedIn to connect with Darshan RG.",
     ],
   },
-  pkRef: "My-Agent / professional knowledge base (in progress)",
+  pkRef: "Professional knowledge base (in development)",
 };
 
 export const profile = {
@@ -206,7 +206,7 @@ export const projectCatalog: ProjectItem[] = [
     name: "My-Agent / professional knowledge base",
     kind: "engineering",
     description:
-      "Structured professional knowledge and portfolio outputs; disclosed interview representative planned (see Interview section).",
+      "Structured professional knowledge and RAG-oriented outputs; interview representative on the roadmap (Interview section).",
     stack: ["React", "Python", "RAG"],
     links: [
       { label: "Repository", href: "https://github.com/gowda-rg/sentient_syntax" },

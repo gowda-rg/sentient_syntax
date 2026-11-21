@@ -23,7 +23,7 @@ export const participatoryCues: ParticipatoryCue[] = [
     tone: "punch",
   },
   {
-    text: "Coherence is optional until someone hires for it.",
+    text: "Coherence is a design choice, not a default state.",
     motion: "fall-slow",
     tone: "reflect",
   },
@@ -33,7 +33,7 @@ export const participatoryCues: ParticipatoryCue[] = [
     tone: "reflect",
   },
   {
-    text: "Every filter you apply to a candidate applies to you in reverse.",
+    text: "Context stacks faster than conclusions can settle.",
     motion: "fall-fast",
     tone: "punch",
   },
@@ -53,7 +53,7 @@ export const participatoryCues: ParticipatoryCue[] = [
     tone: "reflect",
   },
   {
-    text: "This sentence knows it is not your summary.",
+    text: "Meaning accrues where attention lingers.",
     motion: "rise-fast",
     tone: "punch",
   },

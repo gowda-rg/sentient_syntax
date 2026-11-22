@@ -1,86 +1,37 @@
 # sentient_syntax
 
-**Sentient Syntax** — hiring portfolio for [sentientsyntax.com](https://www.sentientsyntax.com/).
+Source for **[sentientsyntax.com](https://www.sentientsyntax.com/)** — Darshan RG’s portfolio site (experience, projects, writing, skills, contact).
 
-Single-screen hub: cosmic background, glass panels, center focus (no long vertical resume page). Copy aligns with `../portfolio-resume/professional-knowledge-base/` in the monorepo workspace.
+## Site
 
-## Features
+| Section | Content |
+|---------|---------|
+| Overview | Profile, resume (PDF), links |
+| Experience | Employment history with company links |
+| Projects | Engineering and selected repos |
+| Writing | Substack and research archive |
+| Skills | Stack groupings |
+| Interview | Coming soon — disclosed AI representative (no live chat yet) |
 
-- **Viewport hub** — Overview, Experience, Projects, **Writing**, Skills, Contact via sidebar + tabs; search jumps to a role, project, or writing destination
-- **Horizontal rails** — switch jobs and code/conceptual projects without leaving the center focus (no Shipped/Active labels; conceptual items use subtle shape cues)
-- **Writing** — Substack and GitHub Pages in their own section (`writingDestinations` in `siteKnowledge.ts`), not duplicated on the project rail
-- **Glass UI** — translucent cards over neural / star / cosmic layers (dark only)
-- **Resume** — `public/Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf` (download from Overview / Contact)
-- **Brand** — `public/logo.jpeg` (fractal mark; favicon, OG image, sidebar)
+Static SPA; content is driven by `src/content/siteKnowledge.ts` (aligned with the professional knowledge base in the workspace monorepo).
+
+**Also on the site:** brief staged entry before the hub loads; optional on-device quick notes (`localStorage`, copy-out only — nothing sent to a server).
 
 ## Stack
 
-| Layer | Choice |
-|-------|--------|
-| Build | Vite 5 + `@vitejs/plugin-react-swc` |
-| UI | React 18, TypeScript, React Router 6 |
-| Styling | Tailwind 3 (`darshan` tokens + CSS variables in `src/index.css`) |
-| Toasts | Sonner |
-
-Removed from the original Lovable scaffold: shadcn/Radix bulk, Supabase, TanStack Query, admin route.
+React 18 · TypeScript · Vite 5 · Tailwind CSS · React Router
 
 ## Develop
 
 ```bash
 npm install
-npm run dev      # http://localhost:8080 (host: true for LAN)
-npm run build    # tsc -p tsconfig.app.json + vite build → dist/
-npm run preview
-npm run lint
-```
-
-Node: see `.nvmrc` (LTS recommended).
-
-## Project layout
-
-```
-public/
-  logo.jpeg
-  robots.txt
-  sitemap.xml
-  Darshan_RG_Full_Stack_AI_Engineer_Resume_v1.pdf
-src/
-  content/siteKnowledge.ts    # Site copy (sync from PKB)
-  components/
-    PortfolioHub.tsx            # Main hub UI
-    AppearanceSidebar.tsx     # Section nav + brand
-    NeuralBackground.tsx, StarField.tsx, CosmicBackground.tsx
-  pages/Index.tsx             # Background + immersion gate
-```
-
-## Config
-
-| File | Role |
-|------|------|
-| `tsconfig.app.json` | App typecheck (`npm run build`) |
-| `tsconfig.json` | Project references only |
-| `vite.config.ts` | Port 8080, `@/` → `src/` |
-| `tailwind.config.ts` | `darshan` color scales |
-
-## Deploy
-
-Static output: `dist/`. Ensure `public/` assets (resume, favicon) are included. Set production host to serve `index.html` for SPA routes.
-
-After changes:
-
-```bash
+npm run dev
 npm run build
-git add -A
-git commit -m "Describe your change"
-git push origin main
+npm run preview
 ```
 
-Remote: `https://github.com/gowda-rg/sentient_syntax.git` (`origin/main`).
+Production build output: `dist/`.
 
-## Canonical career data
+## Repository
 
-Edit `portfolio-resume/professional-knowledge-base/`, then update `src/content/siteKnowledge.ts` (ingest script planned for v1.1).
-
-## License
-
-Personal project — Darshan RG.
+https://github.com/gowda-rg/sentient_syntax
